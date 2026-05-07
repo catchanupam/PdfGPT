@@ -19,9 +19,7 @@ from langchain.prompts.chat import (
     HumanMessagePromptTemplate,
 )
 from langchain.chat_models import AzureChatOpenAI
-import dotenv, os
 from langchain.vectorstores.redis import Redis
-from langchain.embeddings import OpenAIEmbeddings
 import ast
 
 from error import bad_request
@@ -39,13 +37,9 @@ if platform.system() == "Windows":
     pathlib.PosixPath = pathlib.WindowsPath
 
 def load_data():
-    import os, json
     from langchain.document_loaders import UnstructuredMarkdownLoader
     from langchain.text_splitter import MarkdownTextSplitter
     from urllib.parse import quote
-    
-    from langchain.embeddings import OpenAIEmbeddings
-    from langchain.vectorstores.redis import Redis
 
     excluded_files = ['SECURITY.md','SUPPORT.md', 'CODE_OF_CONDUCT.md', 'MIP-Readiness-Learning-Paths.md']
     text_splitter = MarkdownTextSplitter(chunk_size=1000, chunk_overlap=200)
